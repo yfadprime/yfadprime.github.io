@@ -4,8 +4,8 @@
 <script>
 fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
   .then(r => r.json())
-  .then(d => {
-    location.href = d.url || d;
+  .then(url => {
+    location.href = url;
   });
 </script>
 </body>
