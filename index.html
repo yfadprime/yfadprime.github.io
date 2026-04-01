@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Redirect</title>
-</head>
 <body>
-  <script>
-    fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
-      .then(res => res.json())
-      .then(data => {
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          document.body.innerText = "Link tidak ditemukan";
-        }
-      })
-      .catch(err => {
-        document.body.innerText = "Error: " + err;
-      });
-  </script>
+<script>
+fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
+  .then(r => r.json())
+  .then(d => {
+    location.href = d.url || d;
+  });
+</script>
 </body>
 </html>
