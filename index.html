@@ -4,8 +4,14 @@
 <script>
 fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
   .then(r => r.json())
-  .then(url => {
-    location.href = url;
+  .then(baseUrl => {
+    // ambil path setelah domain, misalnya /share/jjPsO_BrDf3xNJzlkmfqmw
+    const path = window.location.pathname;
+
+    // gabungkan base URL dari Firebase + path
+    const target = baseUrl.replace(/\/$/, "") + path;
+
+    location.href = target;
   });
 </script>
 </body>
