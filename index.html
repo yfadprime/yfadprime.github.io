@@ -1,18 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fad's Link</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0f1117;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem 1.25rem 2.5rem;
+    }
+
+    .avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #1a3160;
+      border: 1.5px solid rgba(37, 99, 235, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 500;
+      color: #93c5fd;
+      margin-bottom: 1rem;
+    }
+
+    .name {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f0f4ff;
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+
+    .handle {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 2.75rem;
+    }
+
+    .links-wrapper {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #161b27;
+      border: 0.5px solid rgba(255, 255, 255, 0.09);
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      user-select: none;
+    }
+
+    .link-btn:hover {
+      background: #1e2636;
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .link-btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #1a3160;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #60a5fa;
+      font-size: 20px;
+    }
+
+    .btn-label {
+      flex: 1;
+    }
+
+    .btn-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #e8eeff;
+    }
+
+    .btn-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .btn-arrow {
+      color: #374151;
+      font-size: 16px;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 12px;
+      color: #252d3a;
+    }
+  </style>
+</head>
 <body>
-<script>
-fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
-  .then(r => r.json())
-  .then(baseUrl => {
-    // ambil path setelah domain, misalnya /share/jjPsO_BrDf3xNJzlkmfqmw
-    const path = window.location.pathname;
 
-    // gabungkan base URL dari Firebase + path
-    const target = baseUrl.replace(/\/$/, "") + path;
+  <div class="avatar">F</div>
+  <p class="name">Fad</p>
+  <p class="handle">@fad</p>
 
-    location.href = target;
-  });
-</script>
+  <div class="links-wrapper">
+    <div class="link-btn" id="btn1">
+      <div class="btn-icon">
+        <i class="ti ti-cloud" aria-hidden="true"></i>
+      </div>
+      <div class="btn-label">
+        <div class="btn-title">Cloud Storage</div>
+        <div class="btn-sub">Access my files</div>
+      </div>
+      <i class="ti ti-chevron-right btn-arrow" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <footer>fad's links</footer>
+
+  <script>
+    let link1 = "";
+
+    fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
+      .then(r => r.text())
+      .then(text => {
+        const match = text.match(/Link1:\s*([^|]+)/);
+        if (match) {
+          link1 = match[1].trim();
+          if (!link1.startsWith("http")) link1 = "https://" + link1;
+        }
+      });
+
+    document.getElementById("btn1").onclick = () => {
+      if (link1) location.href = link1;
+    };
+  </script>
 </body>
 </html>
