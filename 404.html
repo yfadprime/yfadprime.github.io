@@ -1,13 +1,19 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
+<head><title>Redirecting...</title></head>
 <body>
 <script>
-fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
-  .then(r => r.json())
-  .then(baseUrl => {
-    const path = window.location.pathname;
-    const target = baseUrl.replace(/\/$/, "") + path;
-    window.location.href = target;
-  });
+  fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
+    .then(r => r.text())
+    .then(text => {
+      const match = text.match(/Link1:\s*([^|"\s]+)/);
+      if (match) {
+        let base = match[1].trim();
+        if (!base.startsWith("http")) base = "https://" + base;
+        const path = window.location.pathname.replace(/^\/link1/, "");
+        window.location.href = base.replace(/\/$/, "") + path;
+      }
+    });
 </script>
 </body>
 </html>
