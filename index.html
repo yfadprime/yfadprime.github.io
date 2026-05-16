@@ -136,26 +136,41 @@
       </div>
       <i class="ti ti-chevron-right btn-arrow" aria-hidden="true"></i>
     </div>
+
+    <div class="link-btn" id="btn2">
+      <div class="btn-icon">
+        <i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>
+      </div>
+      <div class="btn-label">
+        <div class="btn-title">Control</div>
+        <div class="btn-sub">Open control panel</div>
+      </div>
+      <i class="ti ti-chevron-right btn-arrow" aria-hidden="true"></i>
+    </div>
   </div>
 
   <footer>fad's links</footer>
 
   <script>
-    let link1 = "";
+    let link1 = "", link2 = "";
 
     fetch("https://mihddrl-default-rtdb.asia-southeast1.firebasedatabase.app/Links.json")
       .then(r => r.text())
       .then(text => {
-        const match = text.match(/Link1:\s*([^|]+)/);
-        if (match) {
-          link1 = match[1].trim();
+        const m1 = text.match(/Link1:\s*([^|"\s]+)/);
+        if (m1) {
+          link1 = m1[1].trim();
           if (!link1.startsWith("http")) link1 = "https://" + link1;
+        }
+        const m2 = text.match(/Link2:\s*([^|"\s]+)/);
+        if (m2) {
+          link2 = m2[1].trim();
+          if (!link2.startsWith("http")) link2 = "https://" + link2;
         }
       });
 
-    document.getElementById("btn1").onclick = () => {
-      if (link1) location.href = link1;
-    };
+    document.getElementById("btn1").onclick = () => { if (link1) location.href = link1; };
+    document.getElementById("btn2").onclick = () => { if (link2) location.href = link2; };
   </script>
 </body>
 </html>
